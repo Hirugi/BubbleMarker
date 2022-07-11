@@ -17,6 +17,8 @@ class MainWindow(tk.Tk):
         self.title(config.app_title)
         self.minsize(config.window_min_size_x, config.window_min_size_y)
 
+        self.style = ttk.Style()
+
         # Menu frames / blocks
         self.menu_block = ttk.Frame(
             self, width=config.menu_block_width)

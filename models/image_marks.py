@@ -1,6 +1,8 @@
 from PIL import ImageFont
 from PIL.ImageDraw import ImageDraw
 
+from config import config
+
 
 class ImageMark:
 
@@ -19,16 +21,21 @@ class CircledNumberMark(ImageMark):
 
         self.number = number
         self.font = ImageFont.truetype("Keyboard.ttf", 16)
+        self.r = config.mark_circle_radius
 
     def draw(self, draw_on: ImageDraw) -> ImageDraw:
-        bound_box = (self.x - 15, self.y - 15, self.x + 15, self.y + 15)
+        bound_box = (
+            self.x - self.r,
+            self.y - self.r,
+            self.x + self.r,
+            self.y + self.r
+        )
         draw_on.ellipse(bound_box, fill='white', outline='red', width=2)
         text = str(self.number)
         ascent, descent = self.font.getmetrics()
         w = self.font.getmask(text).getbbox()[2]
         h = self.font.getmask(text).getbbox()[3] + descent
-        # TODO Fix circle centering
         draw_on.text(
-            (self.x - (w - 4), self.y - (h - 4)), text,
-            fill='black', font=self.font, anchor=None, spacing=0, align='center', stroke_width=1)
+            (self.x - (w/2), self.y - (h/2) - 1), text,
+            fill='black', font=self.font)
         return draw_on

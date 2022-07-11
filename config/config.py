@@ -13,7 +13,7 @@ class Config(object):
     APP_NAME = 'BubbleMarker'
     SAVE_CONFIG_KEYS = [
         'max_width', 'max_height', 'app_title', 'window_min_size_y', 'window_min_size_x', 'menu_block_width',
-        'resize_image_height', 'resize_image_width'
+        'resize_image_height', 'resize_image_width', 'mark_circle_radius'
     ]
 
     _instance = None
@@ -47,6 +47,7 @@ class Config(object):
         self.menu_block_upper_height = 150
         self.resize_image_height = 1000
         self.resize_image_width = 1000
+        self.mark_circle_radius = 16
 
     def load_config(self):
         if os.path.isfile(self.file_path):
